@@ -170,4 +170,55 @@ class Arr
         }
         return $newArr;
     }
+
+    /**
+     * list sort
+     * @param $list
+     * @param $field
+     * @param string $sort
+     * @return array|bool
+     */
+    static public function listSort($list, $field, $sort = 'asc')
+    {
+        if (is_array($list)) {
+            $refer = array();
+            $resultSet = array();
+            foreach ($list as $i => $data)
+                $refer[$i] = &$data[$field];
+            switch ($sort) {
+                case 'asc':
+                    asort($refer);
+                    break;
+                case 'desc':
+                    arsort($refer);
+                    break;
+            }
+            foreach ($refer as $key => $val)
+                $resultSet[] = &$list[$key];
+            return $resultSet;
+        }
+        return false;
+    }
+
+    /**
+     * list sum
+     * @param $list
+     * @param $field
+     * @param null $callback
+     * @return int
+     */
+    static public function listSum($list, $field,$callback = null)
+    {
+        $sum = 0;
+        foreach ($list as $row) {
+            if ($callback instanceof \Closure) {
+                if ($callback($row) === true) {
+                    $sum += $row[$field];
+                }
+            }else {
+                $sum += $row[$field];
+            }
+        }
+        return $sum;
+    }
 }
