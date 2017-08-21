@@ -8,7 +8,6 @@
             "email": "shizhice@gmail.com"
         }
     ],
-    "minimum-stability": "v1.0.3",
     "require": {
         "php": ">=5.5.9"
     },
