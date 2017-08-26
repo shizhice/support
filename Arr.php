@@ -221,4 +221,59 @@ class Arr
         }
         return $sum;
     }
+
+    /**
+     * 将二维数组中的某个字段提取出来生成一个新数组
+     * @param $list
+     * @param $field
+     * @return array
+     */
+    static public function throughListFieldToArray($list, $field)
+    {
+        $array = [];
+        foreach ($list as $row) {
+            $array[] = $row[$field];
+        }
+        return $array;
+    }
+
+    /**
+     * 数组排序，支持第二排序
+     * @param $list
+     * @param $orderBy
+     * @return array
+     */
+    static public function listSortForMany($list, $orderBy)
+    {
+        if (!is_array($list) || !$orderBy) {
+            return $list;
+        }
+
+        if (is_string($orderBy)) {
+            $orderBy = explode(',',$orderBy);
+        }
+
+        list($key,$sort) = explode(' ',reset($orderBy));
+
+        $arr = [];
+        foreach ($list as $row) {
+            $arr[$row[$key]][] = $row;
+        }
+
+        if ($sort == "desc") {
+            krsort($arr);
+        }else{
+            ksort($arr);
+        }
+
+        array_shift($orderBy);
+
+        if (!empty($orderBy)) {
+            foreach ($arr as &$row) {
+                $row = self::listSortForMany($row,$orderBy);
+            }
+        }
+
+        return (count($arr) >= 1) ? array_merge(...array_values($arr)) : $arr;
+    }
 }
