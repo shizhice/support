@@ -271,7 +271,7 @@ class Validator
      */
     protected function lengthValidate($value, $min, $max)
     {
-        return $min < mb_strlen($value) && mb_strlen($value) < $max;
+        return $min <= mb_strlen($value) && mb_strlen($value) <= $max;
     }
 
     /**
