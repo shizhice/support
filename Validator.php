@@ -422,7 +422,7 @@ class Validator
             return '';
         }
 
-        reset($this->errorMessages[0]);
-        return current($this->errorMessages[0]);
+        reset($this->errorMessages);
+        return current(current($this->errorMessages));
     }
 }
