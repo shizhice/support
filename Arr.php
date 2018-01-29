@@ -230,6 +230,10 @@ class Arr
      */
     static public function throughListFieldToArray($list, $field)
     {
+        if (function_exists("array_column")) {
+            return array_column($list, $field);
+        }
+
         $array = [];
         foreach ($list as $row) {
             $array[] = $row[$field];
@@ -275,5 +279,29 @@ class Arr
         }
 
         return (count($arr) >= 1) ? array_merge(...array_values($arr)) : $arr;
+    }
+
+    static public function random(array $input, $num)
+    {
+        if (count($input) >= $num) {
+            return $input;
+        }
+
+        shuffle($input);
+
+        return array_slice($input, 0, $input);
+    }
+
+    static public function addPrefixToArrayKey($array, $prefix, $before = true)
+    {
+        foreach ($array as &$key => $value) {
+            $key .= $prefix;
+            if ($before) {
+                $key = $prefix.$key;
+            }else{
+                $key .= $prefix;
+            }
+        }
+        return $array;
     }
 }
