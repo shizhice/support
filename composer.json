@@ -12,6 +12,6 @@
         "php": ">=5.5.9"
     },
     "autoload": {
-        "psr-4": { "Shizhice\\Support\\": "" }
+        "psr-4": { "Shizhice\\Support\\": "src/" }
     }
 }
