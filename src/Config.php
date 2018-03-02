@@ -27,11 +27,11 @@ class Config
      */
     static public function setConfigPath($path)
     {
-        if (is_dir($path)) {
-            self::$configPath = $path;
+        if (! is_dir($path)) {
+            throw new \Exception(sprintf("配置文件%s路径不存在.", $path));
         }
 
-        throw new \Exception(sprintf("配置文件%s路径不存在.", $path));
+        self::$configPath = $path;
     }
 
     /**
