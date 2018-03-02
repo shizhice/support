@@ -56,7 +56,7 @@ class Config
             if (!file_exists(self::$configPath. "/{$file}.php")) {
                 throw new Exception("{$file}配置文件不存在");
             }
-            self::$config[$file] = self::$configPath. "/{$file}.php";
+            self::$config[$file] = include_once self::$configPath. "/{$file}.php";
         }
 
         $value = self::recursionGetValue(self::$config[$file],$offset);
