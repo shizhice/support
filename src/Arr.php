@@ -295,7 +295,7 @@ class Arr
     static public function addPrefixToArrayKey($array, $prefix, $before = true)
     {
         $tmpArray = [];
-        foreach ($array as &$key => $value) {
+        foreach ($array as $key => $value) {
             $tmpArray[$before ? $prefix.$key : $key.$prefix] = $value;
         }
         return $tmpArray;
