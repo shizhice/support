@@ -108,7 +108,7 @@ class Validator
             $args and $args = explode(",", $args);
 
             if (method_exists($this, $rule.'Validate')) {
-                return $this->{$rule.'Validate'}($value,  ...$args);
+                return $this->{$rule.'Validate'}($value,  ...(array) $args);
             }else{
                 return $this->is($value, $rule);
             }
